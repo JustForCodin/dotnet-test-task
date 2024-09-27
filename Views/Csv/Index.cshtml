@@ -1,0 +1,39 @@
+@model IEnumerable<ContactManager.Models.CsvData>
+
+<h2>Upload CSV</h2>
+<form asp-action="Upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" />
+    <input type="submit" value="Upload" />
+</form>
+
+<h2>Uploaded Data</h2>
+<table id="csvTable" class="table">
+    <thead>
+        <tr>
+            <th onclick="sortTable(0)">Name</th>
+            <th onclick="sortTable(1)">Date of Birth</th>
+            <th onclick="sortTable(2)">Married</th>
+            <th onclick="sortTable(3)">Phone</th>
+            <th onclick="sortTable(4)">Salary</th>
+        </tr>
+        <tr>
+            <th><input type="text" id="filterName" onkeyup="filterTable(0)" placeholder="Filter by Name"></th>
+            <th><input type="text" id="filterDob" onkeyup="filterTable(1)" placeholder="Filter by DOB"></th>
+            <th><input type="text" id="filterMarried" onkeyup="filterTable(2)" placeholder="Filter by Married"></th>
+            <th><input type="text" id="filterPhone" onkeyup="filterTable(3)" placeholder="Filter by Phone"></th>
+            <th><input type="text" id="filterSalary" onkeyup="filterTable(4)" placeholder="Filter by Salary"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.DateOfBirth.ToShortDateString()</td>
+                <td>@item.Married</td>
+                <td>@item.Phone</td>
+                <td>@item.Salary</td>
+            </tr>
+        }
+    </tbody>
+</table>
